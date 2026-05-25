@@ -51,6 +51,36 @@ def get_active_students():
     return sorted(students, key=lambda s: s["name"])
 
 
+def get_all_sessions():
+    url = f"{NOTION_BASE}/databases/{SESSIONS_DB_ID}/query"
+    payload = {
+        "page_size": 100,
+        "sorts": [{"property": "Date", "direction": "descending"}],
+    }
+    sessions = []
+    while True:
+        resp = requests.post(url, headers=notion_headers(), json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+        for r in data["results"]:
+            props = r["properties"]
+            relation = props.get("Student", {}).get("relation", [])
+            student_id = relation[0]["id"] if relation else None
+            date_val = props.get("Date", {}).get("date")
+            topics = [t["name"] for t in props.get("Topic Worked On", {}).get("multi_select", [])]
+            paid = props.get("Payment received ", {}).get("checkbox", False)
+            sessions.append({
+                "student_id": student_id,
+                "date": date_val["start"] if date_val else None,
+                "topics": topics,
+                "paid": paid,
+            })
+        if not data.get("has_more"):
+            break
+        payload["start_cursor"] = data["next_cursor"]
+    return sessions
+
+
 def create_session(student, session_date, topics, prev_hw, homework, notes, paid, payment_method):
     title = f"{student['name']} - {session_date.strftime('%-d %b')}"
     properties = {
