@@ -1,4 +1,4 @@
-import type { LeadPayload } from "./tally.js";
+import type { LeadPayload } from "./tally";
 
 export { LeadPayload };
 

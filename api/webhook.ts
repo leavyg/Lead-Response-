@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
-import { extractFromTally, type TallyWebhookBody } from "./lib/providers/tally.js";
-import { extractFromGeneric } from "./lib/providers/generic.js";
-import { triggerLeadResponse } from "./lib/trigger-client.js";
+import { extractFromTally, type TallyWebhookBody } from "./lib/providers/tally";
+import { extractFromGeneric } from "./lib/providers/generic";
+import { triggerLeadResponse } from "./lib/trigger-client";
 
 function verifyTallySignature(req: VercelRequest, secret: string): boolean {
   const signature = req.headers["tally-signature"] as string | undefined;

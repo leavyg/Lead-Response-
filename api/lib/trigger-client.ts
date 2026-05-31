@@ -1,4 +1,4 @@
-import type { LeadPayload } from "./providers/tally.js";
+import type { LeadPayload } from "./providers/tally";
 
 export async function triggerLeadResponse(payload: LeadPayload): Promise<string> {
   const key = process.env.TRIGGER_SECRET_KEY;
