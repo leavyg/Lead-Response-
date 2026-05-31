@@ -15,7 +15,6 @@
   "devDependencies": {
     "@types/node": "latest",
     "@types/nodemailer": "latest",
-    "@vercel/node": "^5.8.8",
     "typescript": "latest"
   }
 }
