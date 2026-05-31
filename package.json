@@ -1,0 +1,21 @@
+{
+  "name": "leads-response-workflow",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx trigger.dev@latest dev",
+    "deploy": "npx trigger.dev@latest deploy"
+  },
+  "dependencies": {
+    "@trigger.dev/sdk": "4.4.6",
+    "googleapis": "latest",
+    "nodemailer": "latest",
+    "openai": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/nodemailer": "latest",
+    "@vercel/node": "^5.8.8",
+    "typescript": "latest"
+  }
+}
